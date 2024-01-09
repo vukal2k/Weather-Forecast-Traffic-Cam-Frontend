@@ -44,9 +44,6 @@ module.exports = {
           900: '#1a202c',
         },
       },
-      lineHeight: {
-        hero: '4.5rem',
-      },
     },
   },
   plugins: [],
