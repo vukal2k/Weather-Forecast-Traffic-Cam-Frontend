@@ -1,4 +1,5 @@
 module.exports = {
+  important: true,
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     fontSize: {
@@ -43,6 +44,7 @@ module.exports = {
           800: '#2d3748',
           900: '#1a202c',
         },
+        pink: '#ffe5ec'
       },
     },
   },
