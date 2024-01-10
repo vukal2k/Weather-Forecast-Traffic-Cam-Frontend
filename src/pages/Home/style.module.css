@@ -1,0 +1,9 @@
+.traffic-image :global(.ant-image){
+  width: 100%;
+}
+
+.location-list :global(.ant-select-selection-item){
+  line-height: 100% !important;
+  font-size: 100%;
+  font-weight: bold;
+}
