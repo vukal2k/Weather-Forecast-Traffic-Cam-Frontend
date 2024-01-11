@@ -1,4 +1,4 @@
-import WeatherForcast from "@/components/WeatherForcast";
+import WeatherForecast from "@/components/WeatherForcast";
 import { useLocation } from "@/hooks/useLocation";
 import { LocationDto } from "@/models/location.dto";
 import { DatePicker, Image, Select, SelectProps, TimePicker } from "antd";
@@ -8,7 +8,7 @@ import styles from './style.module.css';
 
 export default function Home() {
   const {setDate, setTime, data: locationData} = useLocation();
-  const [currentImgUrl, setCurrentImgUrl] = useState<string>();
+  const [currentLocation, setCurrentLocation] = useState<LocationDto>();
 
   const onDateChange = (date: Dayjs|null) => {
     setDate(date?.format('YYYY-MM-DD'));
@@ -19,7 +19,7 @@ export default function Home() {
 
   const onSelectLocation = (value: string) => {
     const currLocationData: LocationDto = (locationData?.data ?? []).find((dt: LocationDto) => (dt.locationLongLat.latitude+'-'+dt.locationLongLat.longitude) === value)
-    setCurrentImgUrl(currLocationData.image)
+    setCurrentLocation(currLocationData)
   }
 
 	return (
@@ -28,13 +28,12 @@ export default function Home() {
 				<DatePicker size="large" format={'DD-MMM-YYYY'} placeholder="Date" className="input input-bordered w-full" onChange={onDateChange}/>
 			</div>
 			<div className="sm:col-span-1">
-				{/* <Input type="text" placeholder="Time" className="input input-bordered w-full" /> */}
 				<TimePicker size="large" className="input input-bordered w-full" onChange={onTimeChange}/>
 			</div>
 			<div className="sm:col-span-2 col-span-3">
 				<Select
 					size="large"
-					className={"input input-bordered w-full h-full text-center text-bold "+styles['location-list']}
+					className={"input input-bordered w-full text-center text-bold "+styles['location-list']}
 					showSearch
           onSelect={onSelectLocation}
 					placeholder="Select a location"
@@ -44,18 +43,55 @@ export default function Home() {
             label: dt.location,
           }))??[]}
 				/>
-			</div>
-			<div className="sm:col-span-1 col-span-3">
-				<WeatherForcast/>
-			</div>
-			<div className="col-span-2">
-        <div className={styles['traffic-image']+' w-full'}>
+        <div className={styles['traffic-image']+' w-full mt-1'}>
           <Image
             className='w-full'
-            src={currentImgUrl}
+            src={currentLocation?.image}
           />		
         </div>	
-      </div>
+			</div>
+			<div className="sm:col-span-1 col-span-3">
+				<WeatherForecast
+          location={currentLocation?.location ?? ''}
+          forecast="Cloundy"
+          hightTemperature={30}
+          lowTemperature={20}
+          periods={[
+            {
+              centraForeCast: 'Cloudy',
+              eastForeCast: 'Cloudy',
+              dateTime: new Date('2024-01-12T12:00:00+08:00'),
+              northForeCast: 'Cloudy',
+              southForeCast: 'Cloudy',
+              westForeCast: 'Cloudy',
+            },
+            {
+              centraForeCast: 'Cloudy',
+              eastForeCast: 'Cloudy',
+              dateTime: new Date('2024-01-12T12:00:00+08:00'),
+              northForeCast: 'Cloudy',
+              southForeCast: 'Cloudy',
+              westForeCast: 'Cloudy',
+            },
+            {
+              centraForeCast: 'Cloudy',
+              eastForeCast: 'Cloudy',
+              dateTime: new Date('2024-01-12T12:00:00+08:00'),
+              northForeCast: 'Cloudy',
+              southForeCast: 'Cloudy',
+              westForeCast: 'Cloudy',
+            },
+            {
+              centraForeCast: 'Cloudy',
+              eastForeCast: 'Cloudy',
+              dateTime: new Date('2024-01-12T12:00:00+08:00'),
+              northForeCast: 'Cloudy',
+              southForeCast: 'Cloudy',
+              westForeCast: 'Cloudy',
+            }
+          ]}
+        />
+			</div>
 	</div>
 	);
 }

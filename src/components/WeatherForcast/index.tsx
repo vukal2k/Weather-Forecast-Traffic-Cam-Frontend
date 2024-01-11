@@ -1,25 +1,61 @@
-export default function WeatherForcast() {
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faCloudBolt, faCloudSun, faSun } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Card, Table } from "antd";
+import dayjs from "dayjs";
+import { periodColumns } from "./config";
+
+export interface WeatherForecastProps {
+  location: string;
+  forecast: string;
+  lowTemperature: number;
+  hightTemperature: number;
+  periods: WeatherForecastPeriodItem[]
+}
+
+export interface WeatherForecastPeriodItem {
+  dateTime: Date;
+  westForeCast: string;
+  eastForeCast: string;
+  centraForeCast: string;
+  southForeCast: string;
+  northForeCast: string;
+}
+
+export default function WeatherForecast(props: WeatherForecastProps) {
+  const renderMainForeCastIcon = ():IconProp=>{
+    switch(props.forecast){
+      case 'Thundery Showers':
+        return faCloudBolt;
+      case 'Cloudy':
+        return faCloudSun;
+      default:
+        return faSun;
+    }
+  }
+  
   return (
-    <div className="flex flex-col items-center p-8 rounded-md sm:px-12 dark:bg-gray-900 dark:text-gray-100 w-full bg-gray-200">
-      <div className="text-center">
-        <h2 className="text-xl font-semibold">Dubai</h2>
-        <p className="text-sm dark:text-gray-400">July 29</p>
-      </div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-32 h-32 p-6 dark:text-yellow-400 fill-current">
-        <path d="M256,104c-83.813,0-152,68.187-152,152s68.187,152,152,152,152-68.187,152-152S339.813,104,256,104Zm0,272A120,120,0,1,1,376,256,120.136,120.136,0,0,1,256,376Z"></path>
-        <rect width="32" height="48" x="240" y="16"></rect>
-        <rect width="32" height="48" x="240" y="448"></rect>
-        <rect width="48" height="32" x="448" y="240"></rect>
-        <rect width="48" height="32" x="16" y="240"></rect>
-        <rect width="32" height="45.255" x="400" y="393.373" transform="rotate(-45 416 416)"></rect>
-        <rect width="32.001" height="45.255" x="80" y="73.373" transform="rotate(-45 96 96)"></rect>
-        <rect width="45.255" height="32" x="73.373" y="400" transform="rotate(-45.001 96.002 416.003)"></rect>
-        <rect width="45.255" height="32.001" x="393.373" y="80" transform="rotate(-45 416 96)"></rect>
-      </svg>
-      <div className="mb-2 text-3xl font-semibold">32°
-        <span className="mx-1 font-normal">/</span>20°
-      </div>
-      <p className="dark:text-gray-400">Partly cloudy</p>
-    </div>
+   <>
+	<div className="w-full max-w-screen-sm bg-white p-10 rounded-xl ring-8 ring-white ring-opacity-40 bg-gray-100">
+		<div className="flex justify-between">
+			<div className="flex flex-col">
+				<span className="text-4xl font-bold">{props.lowTemperature}°C - {props.hightTemperature}°C</span>
+				<span className="font-semibold mt-1 text-gray-500">{props.location}</span>
+			</div>
+      <FontAwesomeIcon icon={renderMainForeCastIcon()} size="10x"/>
+		</div>
+		<div className="mt-12">
+			{(props.periods ?? []).map(period => <div className="flex flex-col items-center">
+
+        <Card size="default" title={<div className="flex justify-center">
+          <span className="font-semibold mt-1 text-sm">{dayjs(period.dateTime).format('hh:mm')}</span>
+          <span className="font-semibold mt-1 ml-1 text-sm text-gray-400">{dayjs(period.dateTime).format('A')}</span>
+        </div>}>
+          <Table dataSource={[period]} columns={periodColumns} pagination={false}/>
+        </Card>        
+			</div>)}
+		</div>
+	</div>
+   </>
   )
 }
