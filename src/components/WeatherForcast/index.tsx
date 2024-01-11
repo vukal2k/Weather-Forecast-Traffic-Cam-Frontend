@@ -14,6 +14,7 @@ export interface WeatherForecastProps {
 }
 
 export interface WeatherForecastPeriodItem {
+  id?: number;
   dateTime: Date;
   westForeCast: string;
   eastForeCast: string;
@@ -45,13 +46,13 @@ export default function WeatherForecast(props: WeatherForecastProps) {
       <FontAwesomeIcon icon={renderMainForeCastIcon()} size="10x"/>
 		</div>
 		<div className="mt-12">
-			{(props.periods ?? []).map(period => <div className="flex flex-col items-center">
+			{(props.periods ?? []).map((period, index) => <div key={index} className="flex flex-col items-center">
 
         <Card size="default" title={<div className="flex justify-center">
           <span className="font-semibold mt-1 text-sm">{dayjs(period.dateTime).format('hh:mm')}</span>
           <span className="font-semibold mt-1 ml-1 text-sm text-gray-400">{dayjs(period.dateTime).format('A')}</span>
         </div>}>
-          <Table dataSource={[period]} columns={periodColumns} pagination={false}/>
+          <Table rowKey={"id"} dataSource={[period]} columns={periodColumns} pagination={false}/>
         </Card>        
 			</div>)}
 		</div>
