@@ -3,5 +3,8 @@ export const API = {
     LOCATIONS: {
       path: '/locations'
     }
+  },
+  WEATHER_FORECAST: {
+    path: '/forecast24-hours'
   }
 }

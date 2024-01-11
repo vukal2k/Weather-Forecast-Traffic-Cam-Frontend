@@ -1,26 +1,30 @@
 import WeatherForecast from "@/components/WeatherForcast";
 import { useLocation } from "@/hooks/useLocation";
+import { useWeatherForecast } from "@/hooks/useWeatherForecast";
 import { LocationDto } from "@/models/location.dto";
-import { DatePicker, Image, Select, SelectProps, Spin, TimePicker, message, notification } from "antd";
+import { DatePicker, Image, Select, Spin, TimePicker, message } from "antd";
 import type { Dayjs } from 'dayjs';
 import { useEffect, useState } from "react";
 import styles from './style.module.css';
 
 export default function Home() {
   const {setDate, setTime, data: locationData, isLoading, isError} = useLocation();
+  const {setDate: setWatherForecastDate, setTime: setWeatherForecastTime, data: weatherForecastData, isError: weatherForecastIsError} =  useWeatherForecast();
   const [currentLocation, setCurrentLocation] = useState<LocationDto>();
   const [messageApi, contextHolder] = message.useMessage();
 
 
   useEffect(()=>{
-    isError && messageApi.error(`Something went wrong`)
-  }, [isError]);
+    (isError || weatherForecastIsError) && messageApi.error(`Something went wrong`)
+  }, [isError, weatherForecastIsError]);
 
   const onDateChange = (date: Dayjs|null) => {
     setDate(date?.format('YYYY-MM-DD'));
+    setWatherForecastDate(date?.format('YYYY-MM-DD'));
   };
   const onTimeChange = (time: Dayjs|null) => {
     setTime(time?.format('hh:mm:ss'));
+    setWeatherForecastTime(time?.format('hh:mm:ss'));
   };
 
   const onSelectLocation = (value: string) => {
@@ -65,48 +69,8 @@ export default function Home() {
         </div>
         <div className="sm:col-span-1 col-span-3">
           <WeatherForecast
+            {...(weatherForecastData?.data ?? {})}
             location={currentLocation?.location ?? ''}
-            forecast="Cloundy"
-            hightTemperature={30}
-            lowTemperature={20}
-            periods={[
-              {
-                id: 1,
-                centraForeCast: 'Cloudy',
-                eastForeCast: 'Cloudy',
-                dateTime: new Date('2024-01-12T12:00:00+08:00'),
-                northForeCast: 'Cloudy',
-                southForeCast: 'Cloudy',
-                westForeCast: 'Cloudy',
-              },
-              {
-                id: 2,
-                centraForeCast: 'Cloudy',
-                eastForeCast: 'Cloudy',
-                dateTime: new Date('2024-01-12T12:00:00+08:00'),
-                northForeCast: 'Cloudy',
-                southForeCast: 'Cloudy',
-                westForeCast: 'Cloudy',
-              },
-              {
-                id: 3,
-                centraForeCast: 'Cloudy',
-                eastForeCast: 'Cloudy',
-                dateTime: new Date('2024-01-12T12:00:00+08:00'),
-                northForeCast: 'Cloudy',
-                southForeCast: 'Cloudy',
-                westForeCast: 'Cloudy',
-              },
-              {
-                id: 4,
-                centraForeCast: 'Cloudy',
-                eastForeCast: 'Cloudy',
-                dateTime: new Date('2024-01-12T12:00:00+08:00'),
-                northForeCast: 'Cloudy',
-                southForeCast: 'Cloudy',
-                westForeCast: 'Cloudy',
-              }
-            ]}
           />
         </div>
     </div>
