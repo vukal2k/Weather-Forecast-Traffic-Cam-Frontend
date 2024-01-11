@@ -1,13 +1,13 @@
 import WeatherForecast from "@/components/WeatherForcast";
 import { useLocation } from "@/hooks/useLocation";
 import { LocationDto } from "@/models/location.dto";
-import { DatePicker, Image, Select, SelectProps, TimePicker } from "antd";
+import { DatePicker, Image, Select, SelectProps, Spin, TimePicker } from "antd";
 import type { Dayjs } from 'dayjs';
 import { useState } from "react";
 import styles from './style.module.css';
 
 export default function Home() {
-  const {setDate, setTime, data: locationData} = useLocation();
+  const {setDate, setTime, data: locationData, isLoading} = useLocation();
   const [currentLocation, setCurrentLocation] = useState<LocationDto>();
 
   const onDateChange = (date: Dayjs|null) => {
@@ -33,6 +33,7 @@ export default function Home() {
 			<div className="sm:col-span-2 col-span-3">
 				<Select
 					size="large"
+          loading={isLoading}
 					className={"input input-bordered w-full text-center text-bold "+styles['location-list']}
 					showSearch
           onSelect={onSelectLocation}
@@ -44,6 +45,10 @@ export default function Home() {
           }))??[]}
 				/>
         <div className={styles['traffic-image']+' w-full mt-1'}>
+          {isLoading && <Spin tip="Loading" size="large">
+              <div className="content" />
+            </Spin>
+          }
           <Image
             className='w-full'
             src={currentLocation?.image}
