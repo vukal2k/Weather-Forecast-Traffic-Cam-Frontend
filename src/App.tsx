@@ -8,6 +8,7 @@ import { ROUTES } from '@/routes';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ErrorBoundary from 'antd/es/alert/ErrorBoundary';
 import React from 'react';
+import withAPIKey from './hoc/withAPIKey';
 
 const queryClient = new QueryClient();
 const Context = React.createContext({});
@@ -32,4 +33,4 @@ function App() {
   )
 }
 
-export default App
+export default withAPIKey(App)
