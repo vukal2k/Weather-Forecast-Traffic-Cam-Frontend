@@ -1,5 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faCloud, faCloudBolt, faCloudMoon, faCloudSun, faSun, faUmbrella } from "@fortawesome/free-solid-svg-icons";
+import { faCloud, faCloudBolt, faCloudMoon, faCloudRain, faCloudSun, faSun, faUmbrella } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Flex } from "antd";
 
@@ -15,6 +15,8 @@ export const renderMainForeCastIcon = (forecast: string): IconProp => {
       return faCloudMoon;
     case 'Light Rain':
       return faUmbrella
+    case 'Showers':
+      return faCloudRain;
     default:
       return faSun;
   }

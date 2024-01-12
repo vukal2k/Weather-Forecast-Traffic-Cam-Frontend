@@ -2,17 +2,22 @@ import WeatherForecast from "@/components/WeatherForcast";
 import { useLocation } from "@/hooks/useLocation";
 import { useWeatherForecast } from "@/hooks/useWeatherForecast";
 import { LocationDto } from "@/models/location.dto";
-import { DatePicker, Image, Select, Spin, TimePicker, message } from "antd";
+import { DatePicker, Image, Select, Spin, TimePicker, Typography, message } from "antd";
 import type { Dayjs } from 'dayjs';
 import { useEffect, useState } from "react";
 import styles from './style.module.css';
+import Badge from "@/components/Badge";
+import { useMyQueryRecently } from "@/hooks/useMyQueryRecently";
+import { useAllQueryRecently } from "@/hooks/useAllQueryRecently";
+import MyQueryRecently from "./components/MyQueryRecently";
+import AllQueryRecently from "./components/AllQueryRecently";
+import dayjs from "dayjs";
 
 export default function Home() {
-  const {setDate, setTime, data: locationData, isLoading, isError} = useLocation();
+  const {setDate, setTime, data: locationData, isLoading, isError, date, time} = useLocation();
   const {setDate: setWatherForecastDate, setTime: setWeatherForecastTime, data: weatherForecastData, isError: weatherForecastIsError} =  useWeatherForecast();
   const [currentLocation, setCurrentLocation] = useState<LocationDto>();
   const [messageApi, contextHolder] = message.useMessage();
-
 
   useEffect(()=>{
     (isError || weatherForecastIsError) && messageApi.error(`Something went wrong`)
@@ -23,8 +28,8 @@ export default function Home() {
     setWatherForecastDate(date?.format('YYYY-MM-DD'));
   };
   const onTimeChange = (time: Dayjs|null) => {
-    setTime(time?.format('hh:mm:ss'));
-    setWeatherForecastTime(time?.format('hh:mm:ss'));
+    setTime(time?.format('HH:mm:ss'));
+    setWeatherForecastTime(time?.format('HH:mm:ss'));
   };
 
   const onSelectLocation = (value: string) => {
@@ -32,15 +37,22 @@ export default function Home() {
     setCurrentLocation(currLocationData)
   }
 
+  const onClickRecentlyBadge = (value: string)=>{
+    onDateChange(dayjs(value))
+    onTimeChange(dayjs(value))
+  }
+
 	return (
     <>
       {contextHolder}
       <div className="grid sm:grid-cols-3 grid-cols-2 gap-4 mt-4 p-8 bg-white p-4">
         <div className="sm:col-span-1">
-          <DatePicker size="large" format={'DD-MMM-YYYY'} placeholder="Date" className="input input-bordered w-full" onChange={onDateChange}/>
+          <DatePicker value={date ? dayjs(date):null} size="large" format={'DD-MMM-YYYY'} placeholder="Date" className="input input-bordered w-full" onChange={onDateChange}/>
         </div>
         <div className="sm:col-span-1">
-          <TimePicker size="large" className="input input-bordered w-full" onChange={onTimeChange}/>
+          <TimePicker value={time ? dayjs(`2024-01-01 ${time}`):null} size="large" className="input input-bordered w-full" onChange={onTimeChange}/>
+          <MyQueryRecently onClick={onClickRecentlyBadge}/>
+          <AllQueryRecently onClick={onClickRecentlyBadge}/>
         </div>
         <div className="sm:col-span-2 col-span-3">
           <Select

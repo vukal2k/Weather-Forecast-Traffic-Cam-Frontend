@@ -9,6 +9,14 @@ export const API = {
   },
   API_KEY: {
     path: '/api-key'
+  },
+  QUERY_REPORT: {
+    MY_RECENTLY: {
+      path: '/query-report/my-recently'
+    },
+    ALL_RECENTLY: {
+      path: '/query-report/all-recently'
+    }
   }
 }
 

@@ -22,10 +22,7 @@ export interface WeatherForecastPeriodItem {
   northForecast: string;
 }
 
-export default function WeatherForecast(props: WeatherForecastProps) {
-  console.log('props: ', props)
-
-  
+export default function WeatherForecast(props: WeatherForecastProps) {  
   return (
    <>
 	<div className="w-full max-w-screen-sm bg-white p-10 rounded-xl ring-8 ring-white ring-opacity-40 bg-gray-200">

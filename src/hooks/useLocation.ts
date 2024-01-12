@@ -9,8 +9,9 @@ export function useLocation() {
 
   let url = useMemo(() => {
     let resultUrl = API.TRAFFIC_IMAGES.LOCATIONS.path;
+    debugger
     if(date && time){
-      const dateTime = moment(`${date} ${time}`, 'yyyy-MM-dd hh:mm:ss').tz('Asia/Singapore').format('yyyy-MM-DDThh:mm:ss+08:00');
+      const dateTime = moment(`${date} ${time}`, 'YYYY-MM-DD HH:mm:ss').tz('Asia/Singapore').format('yyyy-MM-DDThh:mm:ss+08:00');
       resultUrl += `?dateTime=${encodeURIComponent(dateTime)}`;
     }
     return resultUrl;
@@ -20,5 +21,7 @@ export function useLocation() {
     ...useFetchData(url),
     setTime,
     setDate,
+    date,
+    time,
   };
 }
