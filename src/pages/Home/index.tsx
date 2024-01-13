@@ -1,10 +1,12 @@
 import WeatherForecast from "@/components/WeatherForcast";
 import { useLocation } from "@/hooks/useLocation";
+import { useLogLocationSearch } from "@/hooks/useLogLocationSearch";
 import { useWeatherForecast } from "@/hooks/useWeatherForecast";
 import { LocationDto } from "@/models/location.dto";
 import { DatePicker, Image, Select, Spin, TimePicker, message } from "antd";
 import type { Dayjs } from 'dayjs';
 import dayjs from "dayjs";
+import moment from "moment";
 import { useEffect, useState } from "react";
 import AllQueryRecently from "./components/AllQueryRecently";
 import MyQueryRecently from "./components/MyQueryRecently";
@@ -14,6 +16,7 @@ export default function Home() {
   const {setDate, setTime, data: locationData, isLoading, isError, date, time} = useLocation();
   const {setDate: setWatherForecastDate, setTime: setWeatherForecastTime, data: weatherForecastData, isError: weatherForecastIsError} =  useWeatherForecast();
   const [currentLocation, setCurrentLocation] = useState<LocationDto|null>();
+  const {mutate: logLocationSearch} = useLogLocationSearch({})
   const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(()=>{
@@ -33,6 +36,12 @@ export default function Home() {
   const onSelectLocation = (value: string) => {
     const currLocationData: LocationDto = (locationData?.data ?? []).find((dt: LocationDto) => (dt.locationLongLat.latitude+'-'+dt.locationLongLat.longitude) === value)
     setCurrentLocation(currLocationData)
+    if(date && time){
+      logLocationSearch({
+        dateTime: moment(`${date} ${time}`, 'YYYY-MM-DD hh:mm:ss').toISOString(),
+        location: value,
+      })
+    }
   }
 
   const onClickRecentlyBadge = (value: string)=>{

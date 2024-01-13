@@ -16,6 +16,9 @@ export const API = {
     },
     ALL_RECENTLY: {
       path: '/query-report/all-recently'
+    },
+    LOG_LOCATION_SEARCH: {
+      path: '/query-report/log-history'
     }
   }
 }
