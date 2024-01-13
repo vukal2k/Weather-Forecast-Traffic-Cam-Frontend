@@ -13,8 +13,7 @@ export function useWeatherForecast() {
       resultUrl += `?date=${date}`;
     }
     else if (date && time) {
-      const dateTime = moment(`${date} ${time}`, 'YYYY-MM-DD hh:mm:ss').tz('Asia/Singapore').format('yyyy-MM-DDThh:mm:ss+08:00');
-      resultUrl += `?dateTime=${encodeURIComponent(dateTime)}`;
+      resultUrl += `?dateTime=${encodeURIComponent(moment(`${date} ${time}`, 'YYYY-MM-DD hh:mm:ss').toISOString())}`;
     }
     return resultUrl;
   }, [date, time])

@@ -2,21 +2,18 @@ import WeatherForecast from "@/components/WeatherForcast";
 import { useLocation } from "@/hooks/useLocation";
 import { useWeatherForecast } from "@/hooks/useWeatherForecast";
 import { LocationDto } from "@/models/location.dto";
-import { DatePicker, Image, Select, Spin, TimePicker, Typography, message } from "antd";
+import { DatePicker, Image, Select, Spin, TimePicker, message } from "antd";
 import type { Dayjs } from 'dayjs';
-import { useEffect, useState } from "react";
-import styles from './style.module.css';
-import Badge from "@/components/Badge";
-import { useMyQueryRecently } from "@/hooks/useMyQueryRecently";
-import { useAllQueryRecently } from "@/hooks/useAllQueryRecently";
-import MyQueryRecently from "./components/MyQueryRecently";
-import AllQueryRecently from "./components/AllQueryRecently";
 import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import AllQueryRecently from "./components/AllQueryRecently";
+import MyQueryRecently from "./components/MyQueryRecently";
+import styles from './style.module.css';
 
 export default function Home() {
   const {setDate, setTime, data: locationData, isLoading, isError, date, time} = useLocation();
   const {setDate: setWatherForecastDate, setTime: setWeatherForecastTime, data: weatherForecastData, isError: weatherForecastIsError} =  useWeatherForecast();
-  const [currentLocation, setCurrentLocation] = useState<LocationDto>();
+  const [currentLocation, setCurrentLocation] = useState<LocationDto|null>();
   const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(()=>{
@@ -30,6 +27,7 @@ export default function Home() {
   const onTimeChange = (time: Dayjs|null) => {
     setTime(time?.format('HH:mm:ss'));
     setWeatherForecastTime(time?.format('HH:mm:ss'));
+    setCurrentLocation(null);
   };
 
   const onSelectLocation = (value: string) => {
@@ -60,6 +58,7 @@ export default function Home() {
             loading={isLoading}
             className={"input input-bordered w-full text-center text-bold "+styles['location-list']}
             showSearch
+            value={currentLocation ? currentLocation.locationLongLat.latitude + '-'+currentLocation.locationLongLat.longitude: null}
             onSelect={onSelectLocation}
             placeholder="Select a location"
             optionFilterProp="children"

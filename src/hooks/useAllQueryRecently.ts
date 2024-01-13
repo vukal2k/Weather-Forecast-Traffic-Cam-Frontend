@@ -1,9 +1,9 @@
 import { API } from "@/constants/config/apis";
 import { useFetchData } from "./useFetchData";
-let myQueryRecentlyPath = API.QUERY_REPORT.MY_RECENTLY.path;
+let allQueryRecentlyPath = API.QUERY_REPORT.ALL_RECENTLY.path;
 
 export function useAllQueryRecently() {
-  
 
-  return useFetchData(myQueryRecentlyPath);
+
+  return useFetchData(allQueryRecentlyPath);
 }
