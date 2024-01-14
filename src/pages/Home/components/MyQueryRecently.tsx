@@ -9,7 +9,6 @@ interface MyQueryRecentlyProps {
 
 function MyQueryRecently(props: MyQueryRecentlyProps) {
   const { data: myRecentQueryData } = useMyQueryRecently();
-
   return (
     <div className="flex flex-col gap-x-2 sm:flex-row">
       {myRecentQueryData?.data.map((dt: string) => (
