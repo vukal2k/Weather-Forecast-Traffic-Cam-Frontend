@@ -2,32 +2,7 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
 
 # Weather Forecast Traffic Cam
 
@@ -56,13 +31,49 @@ Weather Forecast Traffic Cam is a web application providing real-time weather fo
 ## Getting Started
 
 ### Prerequisites
+- Node.js v18.17.0
+- Docker
 
-- Node.js installed on your machine
-- Basic understanding of React and TypeScript
 
 ### Installation
 
 1. Clone the repository:
+```bash
+git clone https://github.com/vukal2k/Weather-Forecast-Traffic-Cam-Frontend.git
+cd Weather-Forecast-Traffic-Cam-Frontend
+npm install
+```
 
-   ```bash
-   git clone [repository URL]
+## Available Scripts
+In the project directory, you can run:
+
+#### Start the development server:
+```bash
+npm run dev
+```
+#### Build the app for production:
+```bash
+npm run build
+```
+#### Lint the project:
+```bash
+npm run lint
+```
+#### Preview the production build locally:
+```bash
+npm run preview
+```
+
+## Usage
+After starting the development server, the app will be available in your browser at http://localhost:5173. You can view weather forecasts and traffic camera feeds, interact with various UI components, and explore different functionalities.
+
+## Environment Setup
+The project uses different environment files for development and production:
+
+- `env.development`: Contains environment variables for the development environment.
+- `prod.development`: Contains environment variables for the production environment.
+
+
+The project uses the following environment variables:
+- `VITE_BASE_URL`: The base URL of the backend API (e.g., `http://localhost:3000`).
+- `VITE_FE_URL`: The URL for the frontend application (e.g., `http://localhost:5173`).
