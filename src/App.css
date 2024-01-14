@@ -1,0 +1,8 @@
+
+.ant-picker-dropdown .ant-picker-ok .ant-btn-primary{
+  color: #000 !important;
+}
+
+.ant-picker-dropdown .ant-picker-ok .ant-btn-primary :hover{
+  color: white;
+}
