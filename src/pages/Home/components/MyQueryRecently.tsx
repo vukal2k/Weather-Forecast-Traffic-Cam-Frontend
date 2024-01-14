@@ -1,6 +1,5 @@
 import Badge from "@/components/Badge";
 import { useMyQueryRecently } from "@/hooks/useMyQueryRecently";
-import { Flex } from "antd";
 import dayjs from "dayjs";
 
 interface MyQueryRecentlyProps{
@@ -10,7 +9,7 @@ interface MyQueryRecentlyProps{
 function MyQueryRecently(props: MyQueryRecentlyProps) {
   const {data: myRecentQueryData} = useMyQueryRecently();
 
-  return <Flex gap={4}>
+  return <div className="flex flex-col sm:flex-row gap-x-2">
     {myRecentQueryData?.data.map((dt: string) => (          
       <Badge
         onClick={async () => props.onClick(dt)}
@@ -20,7 +19,7 @@ function MyQueryRecently(props: MyQueryRecentlyProps) {
         }}
       />)
     )}
-  </Flex>
+  </div>
 
 }
 

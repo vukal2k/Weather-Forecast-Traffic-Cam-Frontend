@@ -25,13 +25,15 @@ export interface WeatherForecastPeriodItem {
 export default function WeatherForecast(props: WeatherForecastProps) {  
   return (
    <>
-	<div className="w-full max-w-screen-sm bg-white p-10 rounded-xl ring-8 ring-white ring-opacity-40 bg-gray-200">
+	<div className="w-full max-w-screen-sm bg-white p-4 rounded-xl ring-8 ring-white ring-opacity-40 bg-gray-300">
 		<div className="flex justify-between">
 			<div className="flex flex-col">
-				<span className="text-4xl font-bold">{props.lowTemperature ?? 'N/A'}°C - {props.hightTemperature ?? 'N/A'}°C</span>
+				<span className="font-bold text-[35px]">{props.lowTemperature ?? 'N/A'}°C - {props.hightTemperature ?? 'N/A'}°C</span>
 				<span className="font-semibold mt-1 text-gray-500">{props.location}</span>
 			</div>
-      <FontAwesomeIcon icon={renderMainForeCastIcon(props.forecast)} size="10x"/>
+      <div style={{fontSize: '30%'}}>
+       <FontAwesomeIcon icon={renderMainForeCastIcon(props.forecast)} size="10x"/>
+      </div>
 		</div>
       <Flex vertical className="mt-12" gap={16}>
         {(props.periods ?? []).map((period, index) => <div key={index} className={"flex flex-col items-center " +styles['weather-forecast']}>
@@ -40,7 +42,7 @@ export default function WeatherForecast(props: WeatherForecastProps) {
             <span className="font-semibold mt-1 text-sm">{dayjs(period.dateTime).format('DD-MMM-YYYY hh:mm')}</span>
             <span className="font-semibold mt-1 ml-1 text-sm text-gray-400">{dayjs(period.dateTime).format('A')}</span>
           </div>}>
-            <Table rowKey={"id"} dataSource={[period]} columns={periodColumns} pagination={false}/>
+            <Table rowKey={"id"} dataSource={[period]} columns={periodColumns} scroll={{ x: 380 }} pagination={false}/>
           </Card>        
         </div>)}
       </Flex>

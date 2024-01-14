@@ -26,6 +26,7 @@ export const periodColumns = [
     title: <span>West</span>,
     dataIndex: 'westForecast',
     key: 'westForeCast',
+    width: 76,
     render: (value: string) => <Flex vertical>
       <FontAwesomeIcon color={'#718096'} icon={renderMainForeCastIcon(value)} size="lg"/>
       <span>{value}</span>
@@ -35,6 +36,7 @@ export const periodColumns = [
     title: <span>East</span>,
     dataIndex: 'eastForecast',
     key: 'eastForeCast',
+    width: 76,
     render: (value: string) => <Flex vertical>
       <FontAwesomeIcon color={'#718096'} icon={renderMainForeCastIcon(value)} size="lg"/>
       <span>{value}</span>
@@ -44,6 +46,7 @@ export const periodColumns = [
     title: <span>Central</span>,
     dataIndex: 'centraForecast',
     key: 'centraForeCast',
+    width: 76,
     render: (value: string) => <Flex vertical>
       <FontAwesomeIcon color={'#718096'} icon={renderMainForeCastIcon(value)} size="lg"/>
       <span>{value}</span>
@@ -53,6 +56,7 @@ export const periodColumns = [
     title: <span>South</span>,
     dataIndex: 'southForecast',
     key: 'southForeCast',
+    width: 76,
     render: (value: string) => <Flex vertical>
       <FontAwesomeIcon color={'#718096'} icon={renderMainForeCastIcon(value)} size="lg"/>
       <span>{value}</span>
@@ -62,6 +66,7 @@ export const periodColumns = [
     title: <span>North</span>,
     dataIndex: 'northForecast',
     key: 'northForeCast',
+    width: 76,
     render: (value: string) => <Flex vertical>
       <FontAwesomeIcon color={'#718096'} icon={renderMainForeCastIcon(value)} size="lg"/>
       <span>{value}</span>

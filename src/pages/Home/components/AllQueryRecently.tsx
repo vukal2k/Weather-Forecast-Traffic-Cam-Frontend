@@ -1,6 +1,6 @@
 import Badge from "@/components/Badge";
 import { useAllQueryRecently } from "@/hooks/useAllQueryRecently";
-import { Flex, Typography } from "antd";
+import { Typography } from "antd";
 import dayjs from "dayjs";
 
 interface AllQueryRecentlyProps{
@@ -10,7 +10,7 @@ interface AllQueryRecentlyProps{
 function AllQueryRecently(props: AllQueryRecentlyProps) {
   const {data: allRecentQueryData} = useAllQueryRecently();
 
-  return <Flex gap={4}>
+  return <div className="flex flex-col sm:flex-row gap-x-2">
     <Typography.Text className="mt-1" type="secondary">Others Recently: </Typography.Text>
     {allRecentQueryData?.data.map((dt: string) => (          
       <Badge
@@ -21,7 +21,7 @@ function AllQueryRecently(props: AllQueryRecentlyProps) {
         }}
       />)
     )}
-  </Flex>
+  </div>
 
 }
 
