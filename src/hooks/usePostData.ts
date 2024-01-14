@@ -1,6 +1,8 @@
+import type { UseMutationOptions } from 'react-query';
+import { useMutation } from 'react-query';
+
 import { config } from '@/constants/config';
 import { HEADER_KEY } from '@/constants/config/apis';
-import { UseMutationOptions, useMutation } from 'react-query';
 
 async function postData<T>(url: string, body: T) {
   const response = await fetch(config.baseUrl + url, {
@@ -13,11 +15,18 @@ async function postData<T>(url: string, body: T) {
   });
   if (!response.ok) {
     // throw new Error('Network response was not ok');
-    return
+    return;
   }
   return response.json();
 }
 
-export function usePostData<T>(url: string, options?: Omit<UseMutationOptions<T, unknown, unknown>, 'mutationFn'>) {
-  return useMutation(['data', url], (body: T) => postData<T>(url, body), options,);
+export function usePostData<T>(
+  url: string,
+  options?: Omit<UseMutationOptions<T, unknown, unknown>, 'mutationFn'>,
+) {
+  return useMutation(
+    ['data', url],
+    (body: T) => postData<T>(url, body),
+    options,
+  );
 }

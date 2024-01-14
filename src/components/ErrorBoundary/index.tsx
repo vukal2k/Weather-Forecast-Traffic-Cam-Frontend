@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default class ErrorBoundary extends React.Component<any, any> {
   constructor(props: any) {
@@ -22,6 +22,6 @@ export default class ErrorBoundary extends React.Component<any, any> {
       return <h1>Something went wrong.</h1>;
     }
 
-    return this.props.children; 
+    return this.props.children;
   }
 }

@@ -1,16 +1,17 @@
-import { config } from '@/constants/config';
-import { HEADER_KEY } from '@/constants/config/apis';
 import { useQuery } from 'react-query';
 
+import { config } from '@/constants/config';
+import { HEADER_KEY } from '@/constants/config/apis';
+
 async function fetchData(url: string) {
-  const response = await fetch(config.baseUrl+url, {
+  const response = await fetch(config.baseUrl + url, {
     headers: {
       [HEADER_KEY.API_KEY]: localStorage.getItem(HEADER_KEY.API_KEY) ?? '',
-    }
+    },
   });
   if (!response.ok) {
     // throw new Error('Network response was not ok');
-    return
+    return;
   }
   return response.json();
 }
@@ -21,5 +22,5 @@ export function useFetchData(url: string, isEnable: boolean = true) {
     cacheTime: 1000,
     retry: 1,
     enabled: isEnable,
-  },);
+  });
 }

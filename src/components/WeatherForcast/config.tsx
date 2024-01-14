@@ -1,7 +1,15 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faCloud, faCloudBolt, faCloudMoon, faCloudRain, faCloudSun, faSun, faUmbrella } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Flex } from "antd";
+import type { IconProp } from '@fortawesome/fontawesome-svg-core';
+import {
+  faCloud,
+  faCloudBolt,
+  faCloudMoon,
+  faCloudRain,
+  faCloudSun,
+  faSun,
+  faUmbrella,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Flex } from 'antd';
 
 export const renderMainForeCastIcon = (forecast: string): IconProp => {
   switch (forecast) {
@@ -14,62 +22,92 @@ export const renderMainForeCastIcon = (forecast: string): IconProp => {
     case 'Partly Cloudy (Night)':
       return faCloudMoon;
     case 'Light Rain':
-      return faUmbrella
+      return faUmbrella;
     case 'Showers':
       return faCloudRain;
     default:
       return faSun;
   }
-}
+};
 export const periodColumns = [
   {
     title: <span>West</span>,
     dataIndex: 'westForecast',
     key: 'westForeCast',
     width: 76,
-    render: (value: string) => <Flex vertical>
-      <FontAwesomeIcon color={'#718096'} icon={renderMainForeCastIcon(value)} size="lg"/>
-      <span>{value}</span>
-    </Flex>
+    render: (value: string) => (
+      <Flex vertical>
+        <FontAwesomeIcon
+          color={'#718096'}
+          icon={renderMainForeCastIcon(value)}
+          size="lg"
+        />
+        <span>{value}</span>
+      </Flex>
+    ),
   },
   {
     title: <span>East</span>,
     dataIndex: 'eastForecast',
     key: 'eastForeCast',
     width: 76,
-    render: (value: string) => <Flex vertical>
-      <FontAwesomeIcon color={'#718096'} icon={renderMainForeCastIcon(value)} size="lg"/>
-      <span>{value}</span>
-    </Flex>
+    render: (value: string) => (
+      <Flex vertical>
+        <FontAwesomeIcon
+          color={'#718096'}
+          icon={renderMainForeCastIcon(value)}
+          size="lg"
+        />
+        <span>{value}</span>
+      </Flex>
+    ),
   },
   {
     title: <span>Central</span>,
     dataIndex: 'centraForecast',
     key: 'centraForeCast',
     width: 76,
-    render: (value: string) => <Flex vertical>
-      <FontAwesomeIcon color={'#718096'} icon={renderMainForeCastIcon(value)} size="lg"/>
-      <span>{value}</span>
-    </Flex>
+    render: (value: string) => (
+      <Flex vertical>
+        <FontAwesomeIcon
+          color={'#718096'}
+          icon={renderMainForeCastIcon(value)}
+          size="lg"
+        />
+        <span>{value}</span>
+      </Flex>
+    ),
   },
   {
     title: <span>South</span>,
     dataIndex: 'southForecast',
     key: 'southForeCast',
     width: 76,
-    render: (value: string) => <Flex vertical>
-      <FontAwesomeIcon color={'#718096'} icon={renderMainForeCastIcon(value)} size="lg"/>
-      <span>{value}</span>
-    </Flex>
+    render: (value: string) => (
+      <Flex vertical>
+        <FontAwesomeIcon
+          color={'#718096'}
+          icon={renderMainForeCastIcon(value)}
+          size="lg"
+        />
+        <span>{value}</span>
+      </Flex>
+    ),
   },
   {
     title: <span>North</span>,
     dataIndex: 'northForecast',
     key: 'northForeCast',
     width: 76,
-    render: (value: string) => <Flex vertical>
-      <FontAwesomeIcon color={'#718096'} icon={renderMainForeCastIcon(value)} size="lg"/>
-      <span>{value}</span>
-    </Flex>
+    render: (value: string) => (
+      <Flex vertical>
+        <FontAwesomeIcon
+          color={'#718096'}
+          icon={renderMainForeCastIcon(value)}
+          size="lg"
+        />
+        <span>{value}</span>
+      </Flex>
+    ),
   },
 ];

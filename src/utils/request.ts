@@ -44,7 +44,7 @@ export const request = async <T>({
     ...defaultOptions,
     ...options,
   };
-  let requestUrl = url;
+  const requestUrl = url;
 
   const res: AxiosResponse<T> = await axios(requestUrl, mergedOptions);
 
@@ -52,4 +52,3 @@ export const request = async <T>({
 };
 
 export default request;
-

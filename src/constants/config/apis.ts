@@ -1,28 +1,28 @@
 export const API = {
   TRAFFIC_IMAGES: {
     LOCATIONS: {
-      path: '/locations'
-    }
+      path: '/locations',
+    },
   },
   WEATHER_FORECAST: {
-    path: '/forecast24-hours'
+    path: '/forecast24-hours',
   },
   API_KEY: {
-    path: '/api-key'
+    path: '/api-key',
   },
   QUERY_REPORT: {
     MY_RECENTLY: {
-      path: '/query-report/my-recently'
+      path: '/query-report/my-recently',
     },
     ALL_RECENTLY: {
-      path: '/query-report/all-recently'
+      path: '/query-report/all-recently',
     },
     LOG_LOCATION_SEARCH: {
-      path: '/query-report/log-history'
-    }
-  }
-}
+      path: '/query-report/log-history',
+    },
+  },
+};
 
 export const HEADER_KEY = {
-  API_KEY: 'API-KEY'
-}
+  API_KEY: 'API-KEY',
+};
