@@ -6,6 +6,9 @@ export const API = {
   },
   WEATHER_FORECAST: {
     path: '/forecast24-hours',
+    NEXT_2_HOURS: {
+      path: '/forecast24-hours/2-hours-forecast',
+    },
   },
   API_KEY: {
     path: '/api-key',
