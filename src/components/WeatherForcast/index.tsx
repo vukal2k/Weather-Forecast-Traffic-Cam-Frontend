@@ -11,6 +11,7 @@ export interface WeatherForecastProps {
   lowTemperature: number;
   hightTemperature: number;
   periods: WeatherForecastPeriodItem[];
+  locationForeCast: string;
 }
 
 export interface WeatherForecastPeriodItem {
@@ -39,7 +40,9 @@ export default function WeatherForecast(props: WeatherForecastProps) {
           </div>
           <div style={{ fontSize: '30%' }}>
             <FontAwesomeIcon
-              icon={renderMainForeCastIcon(props.forecast)}
+              icon={renderMainForeCastIcon(
+                props.locationForeCast ?? props.forecast,
+              )}
               size="10x"
             />
           </div>
