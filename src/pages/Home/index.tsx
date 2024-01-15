@@ -5,6 +5,7 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 
 import WeatherForecast from '@/components/WeatherForcast';
+import { use2hWeatherForecast } from '@/hooks/use2hWeatherForecast';
 import { useLocation } from '@/hooks/useLocation';
 import { useLogLocationSearch } from '@/hooks/useLogLocationSearch';
 import { useWeatherForecast } from '@/hooks/useWeatherForecast';
@@ -72,6 +73,13 @@ export default function Home() {
     onTimeChange(dayjs(value));
   };
 
+  const { data: data2hWeatherForecast } = use2hWeatherForecast(
+    currentLocation?.locationLongLat.latitude,
+    currentLocation?.locationLongLat.longitude,
+    time,
+    date,
+  );
+
   return (
     <>
       {contextHolder}
@@ -138,6 +146,7 @@ export default function Home() {
           <WeatherForecast
             {...(weatherForecastData?.data ?? {})}
             location={currentLocation?.location ?? ''}
+            locationForeCast={data2hWeatherForecast?.data}
           />
         </div>
       </div>
