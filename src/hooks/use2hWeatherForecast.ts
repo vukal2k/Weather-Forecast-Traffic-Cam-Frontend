@@ -18,6 +18,6 @@ export function use2hWeatherForecast(
   }, [date, time, lat, long]);
 
   return {
-    ...useFetchData(url),
+    ...useFetchData(url, !!(lat && long && date && time)),
   };
 }
